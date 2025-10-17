@@ -71,6 +71,7 @@ export const MemorialWebsite = () => {
   const [isPlaying, setIsPlaying] = React.useState(true);
   const [editingConfig, setEditingConfig] = React.useState<Config>(config);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const featureImageInputRef = React.useRef<HTMLInputElement>(null);
   const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
   const [isConfigUnlocked, setIsConfigUnlocked] = React.useState(false);
   React.useEffect(() => {
@@ -286,9 +287,9 @@ export const MemorialWebsite = () => {
   };
 
   // @return
-  return <SortableContainer dndKitId="734f0294-de1d-4c15-8efe-6595c05ab994" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100" data-magicpath-id="0" data-magicpath-path="MemorialWebsite.tsx">
-      <SortableContainer dndKitId="8724c89d-9987-46a9-b2c0-df55ed655f95" containerType="regular" prevTag="div" className="w-full" data-magicpath-id="1" data-magicpath-path="MemorialWebsite.tsx">
-        <SortableContainer dndKitId="1a7a59fe-bd07-40ba-aa41-12a8bd2fb2a6" containerType="regular" prevTag="motion.div" initial={{
+  return <SortableContainer dndKitId="329d70da-10c4-430b-897b-64f550bae9d9" containerType="regular" prevTag="div" className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100" data-magicpath-id="0" data-magicpath-path="MemorialWebsite.tsx">
+      <SortableContainer dndKitId="5c72afd5-8bfd-4350-8269-c14f0c10748c" containerType="regular" prevTag="div" className="w-full" data-magicpath-id="1" data-magicpath-path="MemorialWebsite.tsx">
+        <SortableContainer dndKitId="fa1e1a52-9519-448b-a04e-af5b7ec01cd9" containerType="regular" prevTag="motion.div" initial={{
         opacity: 0,
         y: -20
       }} animate={{
@@ -299,7 +300,7 @@ export const MemorialWebsite = () => {
       }} className="relative h-[60vh] min-h-[400px] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden" data-magicpath-id="2" data-magicpath-path="MemorialWebsite.tsx">
           <div className="absolute inset-0 bg-black/40" data-magicpath-id="3" data-magicpath-path="MemorialWebsite.tsx" />
           <img src={config.featurePictureUrl} alt="Memorial feature" className="w-full h-full object-cover" data-magicpath-id="4" data-magicpath-path="MemorialWebsite.tsx" />
-          <SortableContainer dndKitId="db006a99-fa2a-4aa8-a7c7-bc000e9e41c1" containerType="regular" prevTag="div" className="absolute inset-0 flex items-center justify-center" data-magicpath-id="5" data-magicpath-path="MemorialWebsite.tsx">
+          <SortableContainer dndKitId="3e5f7263-6609-4a42-887b-396987fd1c8b" containerType="regular" prevTag="div" className="absolute inset-0 flex items-center justify-center" data-magicpath-id="5" data-magicpath-path="MemorialWebsite.tsx">
             <motion.h1 data-magicpath-motion-tag="motion.h1" initial={{
             opacity: 0,
             scale: 0.9
@@ -315,9 +316,9 @@ export const MemorialWebsite = () => {
           </SortableContainer>
         </SortableContainer>
 
-        <SortableContainer dndKitId="b3267477-587b-4308-8689-1edd5ba31822" containerType="regular" prevTag="div" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-magicpath-id="7" data-magicpath-path="MemorialWebsite.tsx">
-          <SortableContainer dndKitId="fdd5b24c-b8cd-40cc-99b0-148ce85696ec" containerType="regular" prevTag="div" className="flex flex-col sm:flex-row gap-4 mb-8 justify-center" data-magicpath-id="8" data-magicpath-path="MemorialWebsite.tsx">
-            {!config.disableUpload && <SortableContainer dndKitId="cb9fb726-4a86-4611-9b67-7ff1729d1770" containerType="regular" prevTag="motion.button" whileHover={{
+        <SortableContainer dndKitId="6765391a-f0e2-47b6-bf5d-78e2a080351d" containerType="regular" prevTag="div" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-magicpath-id="7" data-magicpath-path="MemorialWebsite.tsx">
+          <SortableContainer dndKitId="266fc874-8d28-4171-844b-455acdd88bbd" containerType="regular" prevTag="div" className="flex flex-col sm:flex-row gap-4 mb-8 justify-center" data-magicpath-id="8" data-magicpath-path="MemorialWebsite.tsx">
+            {!config.disableUpload && <SortableContainer dndKitId="78c95c34-87e4-4a40-b322-754a1b6b6ffa" containerType="regular" prevTag="motion.button" whileHover={{
             scale: 1.05
           }} whileTap={{
             scale: 0.95
@@ -325,7 +326,7 @@ export const MemorialWebsite = () => {
                 <Upload className="w-5 h-5" data-magicpath-id="10" data-magicpath-path="MemorialWebsite.tsx" />
                 Upload Photos
               </SortableContainer>}
-            {!config.disableSlideshow && photos.length > 0 && <SortableContainer dndKitId="f7863b14-b17c-4a44-8276-c4bee6f0879e" containerType="regular" prevTag="motion.button" whileHover={{
+            {!config.disableSlideshow && photos.length > 0 && <SortableContainer dndKitId="73173a3d-f815-4f2d-a629-91021c147f83" containerType="regular" prevTag="motion.button" whileHover={{
             scale: 1.05
           }} whileTap={{
             scale: 0.95
@@ -333,15 +334,21 @@ export const MemorialWebsite = () => {
                 <Play className="w-5 h-5" data-magicpath-id="12" data-magicpath-path="MemorialWebsite.tsx" />
                 Start Slideshow
               </SortableContainer>}
+            {!config.disableSlideshow && photos.length === 0 && <SortableContainer dndKitId="906f9f87-09e3-4784-be05-208987187725" containerType="regular" prevTag="motion.div" whileHover={{
+            scale: 1.05
+          }} className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg opacity-50 cursor-not-allowed shadow-lg" data-magicpath-id="13" data-magicpath-path="MemorialWebsite.tsx">
+                <Play className="w-5 h-5" data-magicpath-id="14" data-magicpath-path="MemorialWebsite.tsx" />
+                Start Slideshow
+              </SortableContainer>}
           </SortableContainer>
 
-          {photos.length === 0 ? <SortableContainer dndKitId="9bb5c81d-f3e2-4af0-8320-12248184c91d" containerType="regular" prevTag="motion.div" initial={{
+          {photos.length === 0 ? <SortableContainer dndKitId="27db5312-1f81-4762-b078-1428ade54d02" containerType="regular" prevTag="motion.div" initial={{
           opacity: 0
         }} animate={{
           opacity: 1
-        }} className="text-center py-20 text-gray-500" data-magicpath-id="13" data-magicpath-path="MemorialWebsite.tsx">
-              <p className="text-lg" data-magicpath-id="14" data-magicpath-path="MemorialWebsite.tsx">No photos yet. Be the first to share a memory.</p>
-            </SortableContainer> : <SortableContainer dndKitId="01bc00ea-0f2b-4d35-9519-de92e3fe0b8d" containerType="collection" prevTag="div" className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4" data-magicpath-id="15" data-magicpath-path="MemorialWebsite.tsx">
+        }} className="text-center py-20 text-gray-500" data-magicpath-id="15" data-magicpath-path="MemorialWebsite.tsx">
+              <p className="text-lg" data-magicpath-id="16" data-magicpath-path="MemorialWebsite.tsx">No photos yet. Be the first to share a memory.</p>
+            </SortableContainer> : <SortableContainer dndKitId="332800a5-4354-408e-8538-bf546f433859" containerType="collection" prevTag="div" className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4" data-magicpath-id="17" data-magicpath-path="MemorialWebsite.tsx">
               {photos.map((photo, index) => <motion.div data-magicpath-motion-tag="motion.div" key={photo.id} initial={{
             opacity: 0,
             y: 20
@@ -350,10 +357,10 @@ export const MemorialWebsite = () => {
             y: 0
           }} transition={{
             delay: index * 0.05
-          }} className="break-inside-avoid" data-magicpath-uuid={(photo as any)["mpid"] ?? "unsafe"} data-magicpath-id="16" data-magicpath-path="MemorialWebsite.tsx">
-                  <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow" data-magicpath-uuid={(photo as any)["mpid"] ?? "unsafe"} data-magicpath-id="17" data-magicpath-path="MemorialWebsite.tsx">
-                    <img src={photo.url} alt={`Memory ${index + 1}`} loading="lazy" className="w-full h-auto object-cover" data-magicpath-uuid={(photo as any)["mpid"] ?? "unsafe"} data-magicpath-field="url:unknown" data-magicpath-id="18" data-magicpath-path="MemorialWebsite.tsx" />
-                    {photo.uploaderName && <div className="p-3 text-sm text-gray-600" data-magicpath-uuid={(photo as any)["mpid"] ?? "unsafe"} data-magicpath-field="uploaderName:unknown" data-magicpath-id="19" data-magicpath-path="MemorialWebsite.tsx">
+          }} className="break-inside-avoid" data-magicpath-uuid={(photo as any)["mpid"] ?? "unsafe"} data-magicpath-id="18" data-magicpath-path="MemorialWebsite.tsx">
+                  <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow" data-magicpath-uuid={(photo as any)["mpid"] ?? "unsafe"} data-magicpath-id="19" data-magicpath-path="MemorialWebsite.tsx">
+                    <img src={photo.url} alt={`Memory ${index + 1}`} loading="lazy" className="w-full h-auto object-cover" data-magicpath-uuid={(photo as any)["mpid"] ?? "unsafe"} data-magicpath-field="url:unknown" data-magicpath-id="20" data-magicpath-path="MemorialWebsite.tsx" />
+                    {photo.uploaderName && <div className="p-3 text-sm text-gray-600" data-magicpath-uuid={(photo as any)["mpid"] ?? "unsafe"} data-magicpath-field="uploaderName:unknown" data-magicpath-id="21" data-magicpath-path="MemorialWebsite.tsx">
                         Shared by {photo.uploaderName}
                       </div>}
                   </div>
@@ -361,25 +368,25 @@ export const MemorialWebsite = () => {
             </SortableContainer>}
         </SortableContainer>
 
-        <SortableContainer dndKitId="67c6834b-6f87-444f-935a-9f04367ac865" containerType="regular" prevTag="footer" className="bg-gray-800 text-white py-6 mt-20" data-magicpath-id="20" data-magicpath-path="MemorialWebsite.tsx">
-          <SortableContainer dndKitId="93e013f4-2919-4dc5-b0cf-d3a6681e7662" containerType="regular" prevTag="div" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center" data-magicpath-id="21" data-magicpath-path="MemorialWebsite.tsx">
-            <p className="text-sm" data-magicpath-id="22" data-magicpath-path="MemorialWebsite.tsx">© {new Date().getFullYear()} Memorial Website</p>
-            <SortableContainer dndKitId="1c9fc743-87be-4039-a783-91feb479f16b" containerType="regular" prevTag="button" onClick={() => setShowConfigModal(true)} className="text-gray-400 hover:text-white transition-colors" aria-label="Settings" data-magicpath-id="23" data-magicpath-path="MemorialWebsite.tsx">
-              <Settings className="w-6 h-6" data-magicpath-id="24" data-magicpath-path="MemorialWebsite.tsx" />
+        <SortableContainer dndKitId="b3f3d9de-9fa4-4a43-98c5-65ab320a0c67" containerType="regular" prevTag="footer" className="bg-gray-800 text-white py-6 mt-20" data-magicpath-id="22" data-magicpath-path="MemorialWebsite.tsx">
+          <SortableContainer dndKitId="313bd502-5e57-4fc3-b76f-9895032f4044" containerType="regular" prevTag="div" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center" data-magicpath-id="23" data-magicpath-path="MemorialWebsite.tsx">
+            <p className="text-sm" data-magicpath-id="24" data-magicpath-path="MemorialWebsite.tsx">© {new Date().getFullYear()} Memorial Website</p>
+            <SortableContainer dndKitId="23203eb4-9c27-4717-915d-e3f5cc59c9ee" containerType="regular" prevTag="button" onClick={() => setShowConfigModal(true)} className="text-gray-400 hover:text-white transition-colors" aria-label="Settings" data-magicpath-id="25" data-magicpath-path="MemorialWebsite.tsx">
+              <Settings className="w-6 h-6" data-magicpath-id="26" data-magicpath-path="MemorialWebsite.tsx" />
             </SortableContainer>
           </SortableContainer>
         </SortableContainer>
       </SortableContainer>
 
-      <AnimatePresence data-magicpath-id="25" data-magicpath-path="MemorialWebsite.tsx">
-        {showUploadModal && <SortableContainer dndKitId="4065f130-bade-4e32-978e-4976e898b441" containerType="regular" prevTag="motion.div" initial={{
+      <AnimatePresence data-magicpath-id="27" data-magicpath-path="MemorialWebsite.tsx">
+        {showUploadModal && <SortableContainer dndKitId="b7229ae2-cfe0-4bfb-a9f6-f1087a8efc8b" containerType="regular" prevTag="motion.div" initial={{
         opacity: 0
       }} animate={{
         opacity: 1
       }} exit={{
         opacity: 0
-      }} className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={() => setShowUploadModal(false)} data-magicpath-id="26" data-magicpath-path="MemorialWebsite.tsx">
-            <SortableContainer dndKitId="21844260-ec79-4e97-a201-b951cb7b1740" containerType="regular" prevTag="motion.div" initial={{
+      }} className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={() => setShowUploadModal(false)} data-magicpath-id="28" data-magicpath-path="MemorialWebsite.tsx">
+            <SortableContainer dndKitId="c65df98e-6ded-446c-a160-d1fac2e7e793" containerType="regular" prevTag="motion.div" initial={{
           scale: 0.9,
           opacity: 0
         }} animate={{
@@ -388,60 +395,60 @@ export const MemorialWebsite = () => {
         }} exit={{
           scale: 0.9,
           opacity: 0
-        }} onClick={e => e.stopPropagation()} className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" data-magicpath-id="27" data-magicpath-path="MemorialWebsite.tsx">
-              <SortableContainer dndKitId="64e95918-b7de-4538-8beb-a8d0a02169c3" containerType="regular" prevTag="div" className="p-6" data-magicpath-id="28" data-magicpath-path="MemorialWebsite.tsx">
-                <SortableContainer dndKitId="312443c1-a449-47b5-a17d-70b906a34e1a" containerType="regular" prevTag="div" className="flex justify-between items-center mb-6" data-magicpath-id="29" data-magicpath-path="MemorialWebsite.tsx">
-                  <h2 className="text-2xl font-semibold text-gray-900" data-magicpath-id="30" data-magicpath-path="MemorialWebsite.tsx">Upload Photos</h2>
-                  <SortableContainer dndKitId="54777477-8c9f-464e-8684-0cdb26a1f4bc" containerType="regular" prevTag="button" onClick={() => setShowUploadModal(false)} className="text-gray-400 hover:text-gray-600" data-magicpath-id="31" data-magicpath-path="MemorialWebsite.tsx">
-                    <X className="w-6 h-6" data-magicpath-id="32" data-magicpath-path="MemorialWebsite.tsx" />
+        }} onClick={e => e.stopPropagation()} className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" data-magicpath-id="29" data-magicpath-path="MemorialWebsite.tsx">
+              <SortableContainer dndKitId="d3e50eaa-ef4e-49c6-a1f0-9bcd59a363c6" containerType="regular" prevTag="div" className="p-6" data-magicpath-id="30" data-magicpath-path="MemorialWebsite.tsx">
+                <SortableContainer dndKitId="b98ff33a-74ce-425f-9b76-abd43352767b" containerType="regular" prevTag="div" className="flex justify-between items-center mb-6" data-magicpath-id="31" data-magicpath-path="MemorialWebsite.tsx">
+                  <h2 className="text-2xl font-semibold text-gray-900" data-magicpath-id="32" data-magicpath-path="MemorialWebsite.tsx">Upload Photos</h2>
+                  <SortableContainer dndKitId="9a93858f-bfbf-4f06-90b3-95f412fd5626" containerType="regular" prevTag="button" onClick={() => setShowUploadModal(false)} className="text-gray-400 hover:text-gray-600" data-magicpath-id="33" data-magicpath-path="MemorialWebsite.tsx">
+                    <X className="w-6 h-6" data-magicpath-id="34" data-magicpath-path="MemorialWebsite.tsx" />
                   </SortableContainer>
                 </SortableContainer>
 
-                <SortableContainer dndKitId="c1e88498-b4e6-4886-b424-22d434787095" containerType="regular" prevTag="div" onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} className={`border-2 border-dashed rounded-lg p-8 text-center mb-4 transition-colors ${dragOver ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`} data-magicpath-id="33" data-magicpath-path="MemorialWebsite.tsx">
-                  <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" data-magicpath-id="34" data-magicpath-path="MemorialWebsite.tsx" />
-                  <p className="text-gray-600 mb-2" data-magicpath-id="35" data-magicpath-path="MemorialWebsite.tsx">Drag and drop images here</p>
-                  <p className="text-sm text-gray-500 mb-4" data-magicpath-id="36" data-magicpath-path="MemorialWebsite.tsx">or</p>
-                  <button onClick={() => fileInputRef.current?.click()} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" data-magicpath-id="37" data-magicpath-path="MemorialWebsite.tsx">
+                <SortableContainer dndKitId="86a5b122-a936-45b0-8f24-45f45364ef72" containerType="regular" prevTag="div" onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} className={`border-2 border-dashed rounded-lg p-8 text-center mb-4 transition-colors ${dragOver ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`} data-magicpath-id="35" data-magicpath-path="MemorialWebsite.tsx">
+                  <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" data-magicpath-id="36" data-magicpath-path="MemorialWebsite.tsx" />
+                  <p className="text-gray-600 mb-2" data-magicpath-id="37" data-magicpath-path="MemorialWebsite.tsx">Drag and drop images here</p>
+                  <p className="text-sm text-gray-500 mb-4" data-magicpath-id="38" data-magicpath-path="MemorialWebsite.tsx">or</p>
+                  <button onClick={() => fileInputRef.current?.click()} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" data-magicpath-id="39" data-magicpath-path="MemorialWebsite.tsx">
                     Browse Files
                   </button>
-                  <input ref={fileInputRef} type="file" multiple accept="image/*" onChange={handleFileSelect} className="hidden" data-magicpath-id="38" data-magicpath-path="MemorialWebsite.tsx" />
+                  <input ref={fileInputRef} type="file" multiple accept="image/*" onChange={handleFileSelect} className="hidden" data-magicpath-id="40" data-magicpath-path="MemorialWebsite.tsx" />
                 </SortableContainer>
 
-                {uploadFiles.length > 0 && <SortableContainer dndKitId="23c18af1-3bfb-4f52-8a48-7e66b5b662c4" containerType="regular" prevTag="div" className="mb-4" data-magicpath-id="39" data-magicpath-path="MemorialWebsite.tsx">
-                    <p className="text-sm text-gray-600 mb-2" data-magicpath-id="40" data-magicpath-path="MemorialWebsite.tsx">
+                {uploadFiles.length > 0 && <SortableContainer dndKitId="6e58ef7d-917f-4b64-a8fe-084af89702b2" containerType="regular" prevTag="div" className="mb-4" data-magicpath-id="41" data-magicpath-path="MemorialWebsite.tsx">
+                    <p className="text-sm text-gray-600 mb-2" data-magicpath-id="42" data-magicpath-path="MemorialWebsite.tsx">
                       {uploadFiles.length} file(s) selected
                     </p>
-                    <SortableContainer dndKitId="65f7641f-9bc2-4141-990b-94715788a963" containerType="collection" prevTag="div" className="space-y-2" data-magicpath-id="41" data-magicpath-path="MemorialWebsite.tsx">
-                      {uploadFiles.map((file, i) => <div key={i} className="flex items-center justify-between text-sm bg-gray-50 p-2 rounded" data-magicpath-uuid={(file as any)["mpid"] ?? "unsafe"} data-magicpath-id="42" data-magicpath-path="MemorialWebsite.tsx">
-                          <span className="truncate" data-magicpath-uuid={(file as any)["mpid"] ?? "unsafe"} data-magicpath-field="name:unknown" data-magicpath-id="43" data-magicpath-path="MemorialWebsite.tsx">{file.name}</span>
-                          <button onClick={() => setUploadFiles(prev => prev.filter((_, idx) => idx !== i))} className="text-red-500 hover:text-red-700" data-magicpath-uuid={(file as any)["mpid"] ?? "unsafe"} data-magicpath-id="44" data-magicpath-path="MemorialWebsite.tsx">
-                            <X className="w-4 h-4" data-magicpath-uuid={(file as any)["mpid"] ?? "unsafe"} data-magicpath-id="45" data-magicpath-path="MemorialWebsite.tsx" />
+                    <SortableContainer dndKitId="c6846c59-e0d2-4047-b2db-86a5f159bcfb" containerType="collection" prevTag="div" className="space-y-2" data-magicpath-id="43" data-magicpath-path="MemorialWebsite.tsx">
+                      {uploadFiles.map((file, i) => <div key={i} className="flex items-center justify-between text-sm bg-gray-50 p-2 rounded" data-magicpath-uuid={(file as any)["mpid"] ?? "unsafe"} data-magicpath-id="44" data-magicpath-path="MemorialWebsite.tsx">
+                          <span className="truncate" data-magicpath-uuid={(file as any)["mpid"] ?? "unsafe"} data-magicpath-field="name:unknown" data-magicpath-id="45" data-magicpath-path="MemorialWebsite.tsx">{file.name}</span>
+                          <button onClick={() => setUploadFiles(prev => prev.filter((_, idx) => idx !== i))} className="text-red-500 hover:text-red-700" data-magicpath-uuid={(file as any)["mpid"] ?? "unsafe"} data-magicpath-id="46" data-magicpath-path="MemorialWebsite.tsx">
+                            <X className="w-4 h-4" data-magicpath-uuid={(file as any)["mpid"] ?? "unsafe"} data-magicpath-id="47" data-magicpath-path="MemorialWebsite.tsx" />
                           </button>
                         </div>)}
                     </SortableContainer>
                   </SortableContainer>}
 
-                <SortableContainer dndKitId="61bca359-d393-4ef5-af91-1b2a7c49d0de" containerType="regular" prevTag="div" className="space-y-4 mb-4" data-magicpath-id="46" data-magicpath-path="MemorialWebsite.tsx">
-                  <SortableContainer dndKitId="44a8059a-d044-4bde-8d4f-54882c758217" containerType="regular" prevTag="div" data-magicpath-id="47" data-magicpath-path="MemorialWebsite.tsx">
-                    <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="48" data-magicpath-path="MemorialWebsite.tsx">
-                      Your Name {config.uploaderNameMandatory && <span className="text-red-500" data-magicpath-id="49" data-magicpath-path="MemorialWebsite.tsx">*</span>}
+                <SortableContainer dndKitId="12dc7c56-760a-450c-adcc-ad6e77948fc3" containerType="regular" prevTag="div" className="space-y-4 mb-4" data-magicpath-id="48" data-magicpath-path="MemorialWebsite.tsx">
+                  <SortableContainer dndKitId="8101b311-2e46-4319-94dd-b953a316f071" containerType="regular" prevTag="div" data-magicpath-id="49" data-magicpath-path="MemorialWebsite.tsx">
+                    <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="50" data-magicpath-path="MemorialWebsite.tsx">
+                      Your Name {config.uploaderNameMandatory && <span className="text-red-500" data-magicpath-id="51" data-magicpath-path="MemorialWebsite.tsx">*</span>}
                     </label>
-                    <input type="text" value={uploaderName} onChange={e => setUploaderName(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter your name" data-magicpath-id="50" data-magicpath-path="MemorialWebsite.tsx" />
+                    <input type="text" value={uploaderName} onChange={e => setUploaderName(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter your name" data-magicpath-id="52" data-magicpath-path="MemorialWebsite.tsx" />
                   </SortableContainer>
 
-                  {config.requireUploadPassword && <SortableContainer dndKitId="28878e2e-45da-4f45-8660-e0d1c9dfcf04" containerType="regular" prevTag="div" data-magicpath-id="51" data-magicpath-path="MemorialWebsite.tsx">
-                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="52" data-magicpath-path="MemorialWebsite.tsx">
+                  {config.requireUploadPassword && <SortableContainer dndKitId="a8f3982d-00da-4521-8e6e-d4a5569e39b8" containerType="regular" prevTag="div" data-magicpath-id="53" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="54" data-magicpath-path="MemorialWebsite.tsx">
                         Upload Password *
                       </label>
-                      <input type="password" value={uploadPassword} onChange={e => setUploadPassword(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter upload password" data-magicpath-id="53" data-magicpath-path="MemorialWebsite.tsx" />
+                      <input type="password" value={uploadPassword} onChange={e => setUploadPassword(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter upload password" data-magicpath-id="55" data-magicpath-path="MemorialWebsite.tsx" />
                     </SortableContainer>}
                 </SortableContainer>
 
-                {uploadError && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm" data-magicpath-id="54" data-magicpath-path="MemorialWebsite.tsx">
+                {uploadError && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm" data-magicpath-id="56" data-magicpath-path="MemorialWebsite.tsx">
                     {uploadError}
                   </div>}
 
-                <button onClick={handleUploadSubmit} disabled={uploading} className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors" data-magicpath-id="55" data-magicpath-path="MemorialWebsite.tsx">
+                <button onClick={handleUploadSubmit} disabled={uploading} className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors" data-magicpath-id="57" data-magicpath-path="MemorialWebsite.tsx">
                   {uploading ? 'Uploading...' : 'Upload Photos'}
                 </button>
               </SortableContainer>
@@ -449,15 +456,15 @@ export const MemorialWebsite = () => {
           </SortableContainer>}
       </AnimatePresence>
 
-      <AnimatePresence data-magicpath-id="56" data-magicpath-path="MemorialWebsite.tsx">
-        {showSlideshowSettings && <SortableContainer dndKitId="2a0d6427-507b-422d-a7a5-8d5e9692e61d" containerType="regular" prevTag="motion.div" initial={{
+      <AnimatePresence data-magicpath-id="58" data-magicpath-path="MemorialWebsite.tsx">
+        {showSlideshowSettings && <SortableContainer dndKitId="ee1dd592-3e14-4517-a551-6bac0077021c" containerType="regular" prevTag="motion.div" initial={{
         opacity: 0
       }} animate={{
         opacity: 1
       }} exit={{
         opacity: 0
-      }} className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={() => setShowSlideshowSettings(false)} data-magicpath-id="57" data-magicpath-path="MemorialWebsite.tsx">
-            <SortableContainer dndKitId="13ca0027-02f9-482b-aeec-8aedb8d2618c" containerType="regular" prevTag="motion.div" initial={{
+      }} className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={() => setShowSlideshowSettings(false)} data-magicpath-id="59" data-magicpath-path="MemorialWebsite.tsx">
+            <SortableContainer dndKitId="39e9ac77-30bb-4de3-bc66-9ca10b073801" containerType="regular" prevTag="motion.div" initial={{
           scale: 0.9,
           opacity: 0
         }} animate={{
@@ -466,42 +473,42 @@ export const MemorialWebsite = () => {
         }} exit={{
           scale: 0.9,
           opacity: 0
-        }} onClick={e => e.stopPropagation()} className="bg-white rounded-xl shadow-2xl max-w-md w-full" data-magicpath-id="58" data-magicpath-path="MemorialWebsite.tsx">
-              <SortableContainer dndKitId="b2e8d157-4888-4b4e-86f8-d95d9fe53cf6" containerType="regular" prevTag="div" className="p-6" data-magicpath-id="59" data-magicpath-path="MemorialWebsite.tsx">
-                <SortableContainer dndKitId="c60ccbf9-2ec8-4b49-96c8-ce1099700971" containerType="regular" prevTag="div" className="flex justify-between items-center mb-6" data-magicpath-id="60" data-magicpath-path="MemorialWebsite.tsx">
-                  <h2 className="text-2xl font-semibold text-gray-900" data-magicpath-id="61" data-magicpath-path="MemorialWebsite.tsx">Slideshow Settings</h2>
-                  <SortableContainer dndKitId="df371ea9-5d61-4a54-9034-25c495864d2c" containerType="regular" prevTag="button" onClick={() => setShowSlideshowSettings(false)} className="text-gray-400 hover:text-gray-600" data-magicpath-id="62" data-magicpath-path="MemorialWebsite.tsx">
-                    <X className="w-6 h-6" data-magicpath-id="63" data-magicpath-path="MemorialWebsite.tsx" />
+        }} onClick={e => e.stopPropagation()} className="bg-white rounded-xl shadow-2xl max-w-md w-full" data-magicpath-id="60" data-magicpath-path="MemorialWebsite.tsx">
+              <SortableContainer dndKitId="477278d7-5f5f-4e24-a038-f229dffd33e7" containerType="regular" prevTag="div" className="p-6" data-magicpath-id="61" data-magicpath-path="MemorialWebsite.tsx">
+                <SortableContainer dndKitId="89e2098e-8742-4186-86d5-3886f235e4d0" containerType="regular" prevTag="div" className="flex justify-between items-center mb-6" data-magicpath-id="62" data-magicpath-path="MemorialWebsite.tsx">
+                  <h2 className="text-2xl font-semibold text-gray-900" data-magicpath-id="63" data-magicpath-path="MemorialWebsite.tsx">Slideshow Settings</h2>
+                  <SortableContainer dndKitId="24308bde-81da-4f5d-8de8-94c5c177d194" containerType="regular" prevTag="button" onClick={() => setShowSlideshowSettings(false)} className="text-gray-400 hover:text-gray-600" data-magicpath-id="64" data-magicpath-path="MemorialWebsite.tsx">
+                    <X className="w-6 h-6" data-magicpath-id="65" data-magicpath-path="MemorialWebsite.tsx" />
                   </SortableContainer>
                 </SortableContainer>
 
-                <SortableContainer dndKitId="712b80ab-a91f-4db6-bbcb-719db813ed0a" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="64" data-magicpath-path="MemorialWebsite.tsx">
-                  <SortableContainer dndKitId="d8a188ca-e267-4a36-853e-67ffd689678a" containerType="regular" prevTag="div" data-magicpath-id="65" data-magicpath-path="MemorialWebsite.tsx">
-                    <label className="block text-sm font-medium text-gray-700 mb-2" data-magicpath-id="66" data-magicpath-path="MemorialWebsite.tsx">
+                <SortableContainer dndKitId="c329d3cd-1d3b-4d46-80bc-22a23e124733" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="66" data-magicpath-path="MemorialWebsite.tsx">
+                  <SortableContainer dndKitId="9dc03e15-fe78-40b8-b410-1e880f18f3b0" containerType="regular" prevTag="div" data-magicpath-id="67" data-magicpath-path="MemorialWebsite.tsx">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" data-magicpath-id="68" data-magicpath-path="MemorialWebsite.tsx">
                       Speed: {slideshowSpeed}s per photo
                     </label>
-                    <input type="range" min="2" max="15" value={slideshowSpeed} onChange={e => setSlideshowSpeed(Number(e.target.value))} className="w-full" data-magicpath-id="67" data-magicpath-path="MemorialWebsite.tsx" />
+                    <input type="range" min="2" max="15" value={slideshowSpeed} onChange={e => setSlideshowSpeed(Number(e.target.value))} className="w-full" data-magicpath-id="69" data-magicpath-path="MemorialWebsite.tsx" />
                   </SortableContainer>
 
-                  <SortableContainer dndKitId="466261e9-1526-47e2-841b-1a1f10f187bf" containerType="regular" prevTag="div" data-magicpath-id="68" data-magicpath-path="MemorialWebsite.tsx">
-                    <label className="block text-sm font-medium text-gray-700 mb-2" data-magicpath-id="69" data-magicpath-path="MemorialWebsite.tsx">
+                  <SortableContainer dndKitId="85472632-0de7-4886-baf8-0e52ed401f4c" containerType="regular" prevTag="div" data-magicpath-id="70" data-magicpath-path="MemorialWebsite.tsx">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" data-magicpath-id="71" data-magicpath-path="MemorialWebsite.tsx">
                       Transition Effect
                     </label>
-                    <select value={transitionType} onChange={e => setTransitionType(e.target.value as TransitionType)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-magicpath-id="70" data-magicpath-path="MemorialWebsite.tsx">
-                      <option value="fade" data-magicpath-id="71" data-magicpath-path="MemorialWebsite.tsx">Fade</option>
-                      <option value="slide-left" data-magicpath-id="72" data-magicpath-path="MemorialWebsite.tsx">Slide Left</option>
-                      <option value="slide-right" data-magicpath-id="73" data-magicpath-path="MemorialWebsite.tsx">Slide Right</option>
-                      <option value="zoom-in" data-magicpath-id="74" data-magicpath-path="MemorialWebsite.tsx">Zoom In</option>
-                      <option value="zoom-out" data-magicpath-id="75" data-magicpath-path="MemorialWebsite.tsx">Zoom Out</option>
-                      <option value="flip" data-magicpath-id="76" data-magicpath-path="MemorialWebsite.tsx">Flip</option>
-                      <option value="crossfade" data-magicpath-id="77" data-magicpath-path="MemorialWebsite.tsx">Crossfade</option>
-                      <option value="ken-burns" data-magicpath-id="78" data-magicpath-path="MemorialWebsite.tsx">Ken Burns</option>
-                      <option value="random" data-magicpath-id="79" data-magicpath-path="MemorialWebsite.tsx">Random</option>
+                    <select value={transitionType} onChange={e => setTransitionType(e.target.value as TransitionType)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-magicpath-id="72" data-magicpath-path="MemorialWebsite.tsx">
+                      <option value="fade" data-magicpath-id="73" data-magicpath-path="MemorialWebsite.tsx">Fade</option>
+                      <option value="slide-left" data-magicpath-id="74" data-magicpath-path="MemorialWebsite.tsx">Slide Left</option>
+                      <option value="slide-right" data-magicpath-id="75" data-magicpath-path="MemorialWebsite.tsx">Slide Right</option>
+                      <option value="zoom-in" data-magicpath-id="76" data-magicpath-path="MemorialWebsite.tsx">Zoom In</option>
+                      <option value="zoom-out" data-magicpath-id="77" data-magicpath-path="MemorialWebsite.tsx">Zoom Out</option>
+                      <option value="flip" data-magicpath-id="78" data-magicpath-path="MemorialWebsite.tsx">Flip</option>
+                      <option value="crossfade" data-magicpath-id="79" data-magicpath-path="MemorialWebsite.tsx">Crossfade</option>
+                      <option value="ken-burns" data-magicpath-id="80" data-magicpath-path="MemorialWebsite.tsx">Ken Burns</option>
+                      <option value="random" data-magicpath-id="81" data-magicpath-path="MemorialWebsite.tsx">Random</option>
                     </select>
                   </SortableContainer>
 
-                  <SortableContainer dndKitId="e1b92d01-7922-4314-b3af-b84c551caf85" containerType="regular" prevTag="button" onClick={startSlideshow} className="w-full py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2" data-magicpath-id="80" data-magicpath-path="MemorialWebsite.tsx">
-                    <Play className="w-5 h-5" data-magicpath-id="81" data-magicpath-path="MemorialWebsite.tsx" />
+                  <SortableContainer dndKitId="d46ebe87-b88f-459f-b99f-2038916d787a" containerType="regular" prevTag="button" onClick={startSlideshow} className="w-full py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2" data-magicpath-id="82" data-magicpath-path="MemorialWebsite.tsx">
+                    <Play className="w-5 h-5" data-magicpath-id="83" data-magicpath-path="MemorialWebsite.tsx" />
                     Start Slideshow
                   </SortableContainer>
                 </SortableContainer>
@@ -510,39 +517,39 @@ export const MemorialWebsite = () => {
           </SortableContainer>}
       </AnimatePresence>
 
-      <AnimatePresence data-magicpath-id="82" data-magicpath-path="MemorialWebsite.tsx">
-        {showFullscreenSlideshow && <SortableContainer dndKitId="a9838a93-14b8-4275-bcd9-36039b8a0903" containerType="regular" prevTag="motion.div" initial={{
+      <AnimatePresence data-magicpath-id="84" data-magicpath-path="MemorialWebsite.tsx">
+        {showFullscreenSlideshow && <SortableContainer dndKitId="05e6e107-9349-46c6-ad72-ba0baf6fc8be" containerType="regular" prevTag="motion.div" initial={{
         opacity: 0
       }} animate={{
         opacity: 1
       }} exit={{
         opacity: 0
-      }} className="fixed inset-0 bg-black z-50" data-magicpath-id="83" data-magicpath-path="MemorialWebsite.tsx">
-            <SortableContainer dndKitId="4817bff0-85b2-456a-915b-8d9cc789bec6" containerType="regular" prevTag="div" className="w-full h-full relative" data-magicpath-id="84" data-magicpath-path="MemorialWebsite.tsx">
-              <AnimatePresence mode="wait" data-magicpath-id="85" data-magicpath-path="MemorialWebsite.tsx">
+      }} className="fixed inset-0 bg-black z-50" data-magicpath-id="85" data-magicpath-path="MemorialWebsite.tsx">
+            <SortableContainer dndKitId="4465db6b-38bc-44ff-bf16-d7517d4b4254" containerType="regular" prevTag="div" className="w-full h-full relative" data-magicpath-id="86" data-magicpath-path="MemorialWebsite.tsx">
+              <AnimatePresence mode="wait" data-magicpath-id="87" data-magicpath-path="MemorialWebsite.tsx">
                 <motion.img data-magicpath-motion-tag="motion.img" key={currentSlideIndex} src={photos[currentSlideIndex].url} alt={`Slide ${currentSlideIndex + 1}`} {...getTransitionVariants(transitionType)} transition={{
               duration: 0.8
-            }} className="absolute inset-0 w-full h-full object-contain" data-magicpath-id="86" data-magicpath-path="MemorialWebsite.tsx" />
+            }} className="absolute inset-0 w-full h-full object-contain" data-magicpath-id="88" data-magicpath-path="MemorialWebsite.tsx" />
               </AnimatePresence>
 
-              <SortableContainer dndKitId="409a5889-6201-40a0-9488-755df3a0d359" containerType="regular" prevTag="div" className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6" data-magicpath-id="87" data-magicpath-path="MemorialWebsite.tsx">
-                <SortableContainer dndKitId="75749c47-5635-41b0-a00d-a528ab99977c" containerType="regular" prevTag="div" className="flex items-center justify-between max-w-4xl mx-auto" data-magicpath-id="88" data-magicpath-path="MemorialWebsite.tsx">
-                  <SortableContainer dndKitId="e6e0cf05-1657-4b1b-b19f-b5f4a9af1ed9" containerType="regular" prevTag="div" className="flex items-center gap-4" data-magicpath-id="89" data-magicpath-path="MemorialWebsite.tsx">
-                    <SortableContainer dndKitId="2d50e98f-a517-46ca-a42b-be614d6d79f0" containerType="regular" prevTag="button" onClick={togglePlayPause} className="text-white hover:text-gray-300 transition-colors" data-magicpath-id="90" data-magicpath-path="MemorialWebsite.tsx">
-                      {isPlaying ? <Pause className="w-8 h-8" data-magicpath-id="91" data-magicpath-path="MemorialWebsite.tsx" /> : <Play className="w-8 h-8" data-magicpath-id="92" data-magicpath-path="MemorialWebsite.tsx" />}
+              <SortableContainer dndKitId="672b72fc-7f39-4ab6-9bdf-31bbdae2f8cd" containerType="regular" prevTag="div" className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6" data-magicpath-id="89" data-magicpath-path="MemorialWebsite.tsx">
+                <SortableContainer dndKitId="ffd33501-9f43-4b60-90d9-6f62ffd836dd" containerType="regular" prevTag="div" className="flex items-center justify-between max-w-4xl mx-auto" data-magicpath-id="90" data-magicpath-path="MemorialWebsite.tsx">
+                  <SortableContainer dndKitId="f612289f-cb6e-4d4a-acf8-11ef4b738a59" containerType="regular" prevTag="div" className="flex items-center gap-4" data-magicpath-id="91" data-magicpath-path="MemorialWebsite.tsx">
+                    <SortableContainer dndKitId="283da2b9-63e3-4532-aecc-9838ce6381dd" containerType="regular" prevTag="button" onClick={togglePlayPause} className="text-white hover:text-gray-300 transition-colors" data-magicpath-id="92" data-magicpath-path="MemorialWebsite.tsx">
+                      {isPlaying ? <Pause className="w-8 h-8" data-magicpath-id="93" data-magicpath-path="MemorialWebsite.tsx" /> : <Play className="w-8 h-8" data-magicpath-id="94" data-magicpath-path="MemorialWebsite.tsx" />}
                     </SortableContainer>
-                    <SortableContainer dndKitId="ee7dc80b-fd6c-4eea-baac-a2c51e3843f3" containerType="regular" prevTag="button" onClick={prevSlide} className="text-white hover:text-gray-300 transition-colors" data-magicpath-id="93" data-magicpath-path="MemorialWebsite.tsx">
-                      <ChevronLeft className="w-8 h-8" data-magicpath-id="94" data-magicpath-path="MemorialWebsite.tsx" />
+                    <SortableContainer dndKitId="4872ac05-6a91-4bee-ac64-df13df12da8b" containerType="regular" prevTag="button" onClick={prevSlide} className="text-white hover:text-gray-300 transition-colors" data-magicpath-id="95" data-magicpath-path="MemorialWebsite.tsx">
+                      <ChevronLeft className="w-8 h-8" data-magicpath-id="96" data-magicpath-path="MemorialWebsite.tsx" />
                     </SortableContainer>
-                    <span className="text-white font-medium" data-magicpath-id="95" data-magicpath-path="MemorialWebsite.tsx">
+                    <span className="text-white font-medium" data-magicpath-id="97" data-magicpath-path="MemorialWebsite.tsx">
                       {currentSlideIndex + 1} / {photos.length}
                     </span>
-                    <SortableContainer dndKitId="206eca27-690a-4443-9c6d-390a58386caf" containerType="regular" prevTag="button" onClick={nextSlide} className="text-white hover:text-gray-300 transition-colors" data-magicpath-id="96" data-magicpath-path="MemorialWebsite.tsx">
-                      <ChevronRight className="w-8 h-8" data-magicpath-id="97" data-magicpath-path="MemorialWebsite.tsx" />
+                    <SortableContainer dndKitId="8eb36afd-3ce3-469c-8174-39715f539e16" containerType="regular" prevTag="button" onClick={nextSlide} className="text-white hover:text-gray-300 transition-colors" data-magicpath-id="98" data-magicpath-path="MemorialWebsite.tsx">
+                      <ChevronRight className="w-8 h-8" data-magicpath-id="99" data-magicpath-path="MemorialWebsite.tsx" />
                     </SortableContainer>
                   </SortableContainer>
-                  <SortableContainer dndKitId="c226d5fa-7b38-4fdf-93ef-9ee4244a18de" containerType="regular" prevTag="button" onClick={exitFullscreen} className="text-white hover:text-gray-300 transition-colors" data-magicpath-id="98" data-magicpath-path="MemorialWebsite.tsx">
-                    <Minimize2 className="w-8 h-8" data-magicpath-id="99" data-magicpath-path="MemorialWebsite.tsx" />
+                  <SortableContainer dndKitId="9436e2b7-c6cc-49fd-be2b-6c8f69f727b8" containerType="regular" prevTag="button" onClick={exitFullscreen} className="text-white hover:text-gray-300 transition-colors" data-magicpath-id="100" data-magicpath-path="MemorialWebsite.tsx">
+                    <Minimize2 className="w-8 h-8" data-magicpath-id="101" data-magicpath-path="MemorialWebsite.tsx" />
                   </SortableContainer>
                 </SortableContainer>
               </SortableContainer>
@@ -550,8 +557,8 @@ export const MemorialWebsite = () => {
           </SortableContainer>}
       </AnimatePresence>
 
-      <AnimatePresence data-magicpath-id="100" data-magicpath-path="MemorialWebsite.tsx">
-        {showConfigModal && <SortableContainer dndKitId="4e243fdd-7024-497a-925f-d7c518feaa7f" containerType="regular" prevTag="motion.div" initial={{
+      <AnimatePresence data-magicpath-id="102" data-magicpath-path="MemorialWebsite.tsx">
+        {showConfigModal && <SortableContainer dndKitId="943c314a-a16f-41ce-9a30-0e9d7e0a2581" containerType="regular" prevTag="motion.div" initial={{
         opacity: 0
       }} animate={{
         opacity: 1
@@ -562,8 +569,8 @@ export const MemorialWebsite = () => {
         setConfigPassword('');
         setConfigError('');
         setIsConfigUnlocked(false);
-      }} data-magicpath-id="101" data-magicpath-path="MemorialWebsite.tsx">
-            <SortableContainer dndKitId="148112d1-36e1-46db-9ec2-8c50a74123a3" containerType="regular" prevTag="motion.div" initial={{
+      }} data-magicpath-id="103" data-magicpath-path="MemorialWebsite.tsx">
+            <SortableContainer dndKitId="5dedb658-989a-4493-ac95-3629eee05946" containerType="regular" prevTag="motion.div" initial={{
           scale: 0.9,
           opacity: 0
         }} animate={{
@@ -572,23 +579,23 @@ export const MemorialWebsite = () => {
         }} exit={{
           scale: 0.9,
           opacity: 0
-        }} onClick={e => e.stopPropagation()} className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" data-magicpath-id="102" data-magicpath-path="MemorialWebsite.tsx">
-              <SortableContainer dndKitId="14885fb5-9ddd-46d5-9f17-e6fad7fb550c" containerType="regular" prevTag="div" className="p-6" data-magicpath-id="103" data-magicpath-path="MemorialWebsite.tsx">
-                <SortableContainer dndKitId="6c28d752-b94d-45fc-8dc9-f5075685878a" containerType="regular" prevTag="div" className="flex justify-between items-center mb-6" data-magicpath-id="104" data-magicpath-path="MemorialWebsite.tsx">
-                  <h2 className="text-2xl font-semibold text-gray-900" data-magicpath-id="105" data-magicpath-path="MemorialWebsite.tsx">Configuration</h2>
-                  <SortableContainer dndKitId="962e8a01-95b1-43d6-990a-0ce7d49eed9a" containerType="regular" prevTag="button" onClick={() => {
+        }} onClick={e => e.stopPropagation()} className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" data-magicpath-id="104" data-magicpath-path="MemorialWebsite.tsx">
+              <SortableContainer dndKitId="691633cd-a0c5-4be7-8993-3ee14008d649" containerType="regular" prevTag="div" className="p-6" data-magicpath-id="105" data-magicpath-path="MemorialWebsite.tsx">
+                <SortableContainer dndKitId="28256fd3-6ca1-4116-bf9c-8206261d3da1" containerType="regular" prevTag="div" className="flex justify-between items-center mb-6" data-magicpath-id="106" data-magicpath-path="MemorialWebsite.tsx">
+                  <h2 className="text-2xl font-semibold text-gray-900" data-magicpath-id="107" data-magicpath-path="MemorialWebsite.tsx">Configuration</h2>
+                  <SortableContainer dndKitId="640ef832-3da9-4b1d-9b2c-2cc228bc0bbf" containerType="regular" prevTag="button" onClick={() => {
                 setShowConfigModal(false);
                 setConfigPassword('');
                 setConfigError('');
                 setIsConfigUnlocked(false);
-              }} className="text-gray-400 hover:text-gray-600" data-magicpath-id="106" data-magicpath-path="MemorialWebsite.tsx">
-                    <X className="w-6 h-6" data-magicpath-id="107" data-magicpath-path="MemorialWebsite.tsx" />
+              }} className="text-gray-400 hover:text-gray-600" data-magicpath-id="108" data-magicpath-path="MemorialWebsite.tsx">
+                    <X className="w-6 h-6" data-magicpath-id="109" data-magicpath-path="MemorialWebsite.tsx" />
                   </SortableContainer>
                 </SortableContainer>
 
-                {!isConfigUnlocked ? <SortableContainer dndKitId="b80640c5-2b74-468c-ba97-fd5218cf4045" containerType="regular" prevTag="div" className="space-y-4" data-magicpath-id="108" data-magicpath-path="MemorialWebsite.tsx">
-                    <SortableContainer dndKitId="0ce6d7b5-d224-49b2-b856-9964b911faf8" containerType="regular" prevTag="div" data-magicpath-id="109" data-magicpath-path="MemorialWebsite.tsx">
-                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="110" data-magicpath-path="MemorialWebsite.tsx">
+                {!isConfigUnlocked ? <SortableContainer dndKitId="04f41076-68de-4f0c-8314-cb1fcff7eb86" containerType="regular" prevTag="div" className="space-y-4" data-magicpath-id="110" data-magicpath-path="MemorialWebsite.tsx">
+                    <SortableContainer dndKitId="0155c0a2-8db8-4c80-ad2d-87b5f6a968b0" containerType="regular" prevTag="div" data-magicpath-id="111" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="112" data-magicpath-path="MemorialWebsite.tsx">
                         Enter Configuration Password
                       </label>
                       <input type="password" value={configPassword} onChange={e => setConfigPassword(e.target.value)} onKeyDown={e => {
@@ -600,10 +607,10 @@ export const MemorialWebsite = () => {
                       setConfigError('Incorrect password');
                     }
                   }
-                }} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter password" autoFocus data-magicpath-id="111" data-magicpath-path="MemorialWebsite.tsx" />
+                }} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter password" autoFocus data-magicpath-id="113" data-magicpath-path="MemorialWebsite.tsx" />
                     </SortableContainer>
 
-                    {configError && <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm" data-magicpath-id="112" data-magicpath-path="MemorialWebsite.tsx">
+                    {configError && <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm" data-magicpath-id="114" data-magicpath-path="MemorialWebsite.tsx">
                         {configError}
                       </div>}
 
@@ -614,80 +621,108 @@ export const MemorialWebsite = () => {
                 } else {
                   setConfigError('Incorrect password');
                 }
-              }} className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700" data-magicpath-id="113" data-magicpath-path="MemorialWebsite.tsx">
+              }} className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700" data-magicpath-id="115" data-magicpath-path="MemorialWebsite.tsx">
                       Unlock
                     </button>
-                  </SortableContainer> : <SortableContainer dndKitId="4360aba4-f91f-444b-a57e-6916547d6fdd" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="114" data-magicpath-path="MemorialWebsite.tsx">
-                    <SortableContainer dndKitId="a7b1f8a6-c54c-47d5-b750-22dceabe036b" containerType="regular" prevTag="div" data-magicpath-id="115" data-magicpath-path="MemorialWebsite.tsx">
-                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="116" data-magicpath-path="MemorialWebsite.tsx">
+                  </SortableContainer> : <SortableContainer dndKitId="5d6c5734-891a-4d43-b33a-171495201575" containerType="regular" prevTag="div" className="space-y-6" data-magicpath-id="116" data-magicpath-path="MemorialWebsite.tsx">
+                    <SortableContainer dndKitId="7daaba69-5980-4b66-b1ed-04d718acac17" containerType="regular" prevTag="div" data-magicpath-id="117" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="118" data-magicpath-path="MemorialWebsite.tsx">
                         Heading Text
                       </label>
                       <input type="text" value={editingConfig.heading} onChange={e => setEditingConfig({
                   ...editingConfig,
                   heading: e.target.value
-                })} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-magicpath-id="117" data-magicpath-path="MemorialWebsite.tsx" />
+                })} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-magicpath-id="119" data-magicpath-path="MemorialWebsite.tsx" />
                     </SortableContainer>
 
-                    <SortableContainer dndKitId="7d371e84-fa9a-40dc-bfe6-8634340282f5" containerType="regular" prevTag="div" data-magicpath-id="118" data-magicpath-path="MemorialWebsite.tsx">
-                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="119" data-magicpath-path="MemorialWebsite.tsx">
-                        Feature Picture URL
+                    <SortableContainer dndKitId="b4201ac2-0269-4813-ac8b-f402e43dee9a" containerType="regular" prevTag="div" data-magicpath-id="120" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="block text-sm font-medium text-gray-700 mb-2" data-magicpath-id="121" data-magicpath-path="MemorialWebsite.tsx">
+                        Feature Picture
                       </label>
-                      <input type="url" value={editingConfig.featurePictureUrl} onChange={e => setEditingConfig({
-                  ...editingConfig,
-                  featurePictureUrl: e.target.value
-                })} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-magicpath-id="120" data-magicpath-path="MemorialWebsite.tsx" />
+                      <SortableContainer dndKitId="ca1d1667-c1c7-4321-bf83-0d5c466e134c" containerType="regular" prevTag="div" className="mb-3 space-y-3" data-magicpath-id="122" data-magicpath-path="MemorialWebsite.tsx">
+                        <SortableContainer dndKitId="a38f4397-bddd-4514-b2b0-13b620896fb5" containerType="regular" prevTag="div" data-magicpath-id="123" data-magicpath-path="MemorialWebsite.tsx">
+                          <label className="block text-xs text-gray-600 mb-1" data-magicpath-id="124" data-magicpath-path="MemorialWebsite.tsx">Enter URL or Upload Image</label>
+                          <input type="url" value={editingConfig.featurePictureUrl} onChange={e => setEditingConfig({
+                      ...editingConfig,
+                      featurePictureUrl: e.target.value
+                    })} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/image.jpg" data-magicpath-id="125" data-magicpath-path="MemorialWebsite.tsx" />
+                        </SortableContainer>
+                        <SortableContainer dndKitId="5f72cf1b-e62b-4512-95ff-b82891f208bf" containerType="regular" prevTag="div" className="flex gap-2" data-magicpath-id="126" data-magicpath-path="MemorialWebsite.tsx">
+                          <button onClick={() => featureImageInputRef.current?.click()} className="flex-1 px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors text-sm font-medium" data-magicpath-id="127" data-magicpath-path="MemorialWebsite.tsx">
+                            Upload Image
+                          </button>
+                          <input ref={featureImageInputRef} type="file" accept="image/*" onChange={e => {
+                      if (e.target.files?.[0]) {
+                        const file = e.target.files[0];
+                        const reader = new FileReader();
+                        reader.onload = event => {
+                          if (typeof event.target?.result === 'string') {
+                            setEditingConfig({
+                              ...editingConfig,
+                              featurePictureUrl: event.target.result
+                            });
+                          }
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }} className="hidden" data-magicpath-id="128" data-magicpath-path="MemorialWebsite.tsx" />
+                        </SortableContainer>
+                      </SortableContainer>
+                      {editingConfig.featurePictureUrl && <SortableContainer dndKitId="7d5c3e18-2c51-4df6-a515-eb1368ad1b9e" containerType="regular" prevTag="div" className="rounded-lg overflow-hidden border border-gray-300 h-32" data-magicpath-id="129" data-magicpath-path="MemorialWebsite.tsx">
+                          <img src={editingConfig.featurePictureUrl} alt="Feature preview" className="w-full h-full object-cover" data-magicpath-id="130" data-magicpath-path="MemorialWebsite.tsx" />
+                        </SortableContainer>}
                     </SortableContainer>
 
-                    <SortableContainer dndKitId="2a52b5f8-0343-440d-b8eb-610bd4e78733" containerType="regular" prevTag="div" data-magicpath-id="121" data-magicpath-path="MemorialWebsite.tsx">
-                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="122" data-magicpath-path="MemorialWebsite.tsx">
+                    <SortableContainer dndKitId="8ee0e87a-0c80-440b-bd60-87b4032a70b3" containerType="regular" prevTag="div" data-magicpath-id="131" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="block text-sm font-medium text-gray-700 mb-1" data-magicpath-id="132" data-magicpath-path="MemorialWebsite.tsx">
                         New Configuration Password
                       </label>
                       <input type="password" value={editingConfig.configPassword} onChange={e => setEditingConfig({
                   ...editingConfig,
                   configPassword: e.target.value
-                })} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-magicpath-id="123" data-magicpath-path="MemorialWebsite.tsx" />
+                })} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" data-magicpath-id="133" data-magicpath-path="MemorialWebsite.tsx" />
                     </SortableContainer>
 
-                    <SortableContainer dndKitId="8c7fb48a-deb6-46ae-a81a-6bb49703e8a0" containerType="regular" prevTag="div" className="space-y-3" data-magicpath-id="124" data-magicpath-path="MemorialWebsite.tsx">
-                      <label className="flex items-center gap-2" data-magicpath-id="125" data-magicpath-path="MemorialWebsite.tsx">
+                    <SortableContainer dndKitId="95db14c0-ae89-4f71-947e-0d351e779175" containerType="regular" prevTag="div" className="space-y-3" data-magicpath-id="134" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="flex items-center gap-2" data-magicpath-id="135" data-magicpath-path="MemorialWebsite.tsx">
                         <input type="checkbox" checked={editingConfig.requireUploadPassword} onChange={e => setEditingConfig({
                     ...editingConfig,
                     requireUploadPassword: e.target.checked
-                  })} className="w-4 h-4 text-blue-600 rounded" data-magicpath-id="126" data-magicpath-path="MemorialWebsite.tsx" />
-                        <span className="text-sm text-gray-700" data-magicpath-id="127" data-magicpath-path="MemorialWebsite.tsx">Require password for uploads</span>
+                  })} className="w-4 h-4 text-blue-600 rounded" data-magicpath-id="136" data-magicpath-path="MemorialWebsite.tsx" />
+                        <span className="text-sm text-gray-700" data-magicpath-id="137" data-magicpath-path="MemorialWebsite.tsx">Require password for uploads</span>
                       </label>
 
                       {editingConfig.requireUploadPassword && <input type="password" value={editingConfig.uploadPassword} onChange={e => setEditingConfig({
                   ...editingConfig,
                   uploadPassword: e.target.value
-                })} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Upload password" data-magicpath-id="128" data-magicpath-path="MemorialWebsite.tsx" />}
+                })} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Upload password" data-magicpath-id="138" data-magicpath-path="MemorialWebsite.tsx" />}
 
-                      <label className="flex items-center gap-2" data-magicpath-id="129" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="flex items-center gap-2" data-magicpath-id="139" data-magicpath-path="MemorialWebsite.tsx">
                         <input type="checkbox" checked={editingConfig.disableSlideshow} onChange={e => setEditingConfig({
                     ...editingConfig,
                     disableSlideshow: e.target.checked
-                  })} className="w-4 h-4 text-blue-600 rounded" data-magicpath-id="130" data-magicpath-path="MemorialWebsite.tsx" />
-                        <span className="text-sm text-gray-700" data-magicpath-id="131" data-magicpath-path="MemorialWebsite.tsx">Disable slideshow button</span>
+                  })} className="w-4 h-4 text-blue-600 rounded" data-magicpath-id="140" data-magicpath-path="MemorialWebsite.tsx" />
+                        <span className="text-sm text-gray-700" data-magicpath-id="141" data-magicpath-path="MemorialWebsite.tsx">Disable slideshow button</span>
                       </label>
 
-                      <label className="flex items-center gap-2" data-magicpath-id="132" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="flex items-center gap-2" data-magicpath-id="142" data-magicpath-path="MemorialWebsite.tsx">
                         <input type="checkbox" checked={editingConfig.disableUpload} onChange={e => setEditingConfig({
                     ...editingConfig,
                     disableUpload: e.target.checked
-                  })} className="w-4 h-4 text-blue-600 rounded" data-magicpath-id="133" data-magicpath-path="MemorialWebsite.tsx" />
-                        <span className="text-sm text-gray-700" data-magicpath-id="134" data-magicpath-path="MemorialWebsite.tsx">Disable upload button</span>
+                  })} className="w-4 h-4 text-blue-600 rounded" data-magicpath-id="143" data-magicpath-path="MemorialWebsite.tsx" />
+                        <span className="text-sm text-gray-700" data-magicpath-id="144" data-magicpath-path="MemorialWebsite.tsx">Disable upload button</span>
                       </label>
 
-                      <label className="flex items-center gap-2" data-magicpath-id="135" data-magicpath-path="MemorialWebsite.tsx">
+                      <label className="flex items-center gap-2" data-magicpath-id="145" data-magicpath-path="MemorialWebsite.tsx">
                         <input type="checkbox" checked={editingConfig.uploaderNameMandatory} onChange={e => setEditingConfig({
                     ...editingConfig,
                     uploaderNameMandatory: e.target.checked
-                  })} className="w-4 h-4 text-blue-600 rounded" data-magicpath-id="136" data-magicpath-path="MemorialWebsite.tsx" />
-                        <span className="text-sm text-gray-700" data-magicpath-id="137" data-magicpath-path="MemorialWebsite.tsx">Uploader name mandatory</span>
+                  })} className="w-4 h-4 text-blue-600 rounded" data-magicpath-id="146" data-magicpath-path="MemorialWebsite.tsx" />
+                        <span className="text-sm text-gray-700" data-magicpath-id="147" data-magicpath-path="MemorialWebsite.tsx">Uploader name mandatory</span>
                       </label>
                     </SortableContainer>
 
-                    <button onClick={handleConfigSubmit} className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700" data-magicpath-id="138" data-magicpath-path="MemorialWebsite.tsx">
+                    <button onClick={handleConfigSubmit} className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700" data-magicpath-id="148" data-magicpath-path="MemorialWebsite.tsx">
                       Save Configuration
                     </button>
                   </SortableContainer>}
