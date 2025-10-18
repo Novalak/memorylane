@@ -23,14 +23,6 @@ docker-compose up -d
 
 Access at: http://localhost:4173
 
-## 🔑 Default Settings
-
-- **Admin Password**: `admin123`
-- **Upload Password**: Blank (user must input)
-- **Heading**: "Happy Anniversary Kristy & Neil"
-- **Footer**: "© 2025 Memory Lane"
-- **Browser Title**: "Memory Lane"
-
 ## 🐳 Docker Compose
 
 ```yaml
@@ -53,7 +45,7 @@ services:
 
 1. **Upload Photos** - Drag & drop or browse files
 2. **Start Slideshow** - Click slideshow button for full-screen viewing
-3. **Admin Access** - Click settings icon, enter password `admin123`
+3. **Admin Access** - Click settings icon to configure settings
 4. **Configure** - Customize heading, footer, and other settings
 5. **Export** - Download all photos as ZIP file
 
