@@ -219,10 +219,17 @@ export const MemoryLane = () => {
 
   // Clear localStorage on first load to ensure fresh defaults
   React.useEffect(() => {
+    const APP_VERSION = '2.0.0'; // Increment this to force fresh start
+    const storedVersion = localStorage.getItem('memorylane-version');
     const isFirstLoad = !localStorage.getItem('memorylane-initialized');
-    if (isFirstLoad) {
+    
+    if (isFirstLoad || storedVersion !== APP_VERSION) {
+      // Clear all MemoryLane data
       localStorage.removeItem('memorylane-config');
+      localStorage.removeItem('memorylane-photos');
+      localStorage.removeItem('memorylane-feature-picture');
       localStorage.setItem('memorylane-initialized', 'true');
+      localStorage.setItem('memorylane-version', APP_VERSION);
     }
   }, []);
 
