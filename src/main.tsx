@@ -29,7 +29,17 @@ import { DragStateProvider } from './dnd-kit/DragStateContext.tsx';
 import { MoveProvider } from './dnd-kit/MoveContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  process.env.NODE_ENV === 'development' ? (
+    <StrictMode>
+      <MoveProvider>
+        <DragStateProvider>
+          <RootDnd>
+            <App />
+          </RootDnd>
+        </DragStateProvider>
+      </MoveProvider>
+    </StrictMode>
+  ) : (
     <MoveProvider>
       <DragStateProvider>
         <RootDnd>
@@ -37,5 +47,5 @@ createRoot(document.getElementById('root')!).render(
         </RootDnd>
       </DragStateProvider>
     </MoveProvider>
-  </StrictMode>
+  )
 );

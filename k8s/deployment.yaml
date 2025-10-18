@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memorylane
+  labels:
+    app: memorylane
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: memorylane
+  template:
+    metadata:
+      labels:
+        app: memorylane
+    spec:
+      containers:
+      - name: memorylane
+        image: ghcr.io/novalak/memorylane:latest
+        ports:
+        - containerPort: 4173
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "4173"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        volumeMounts:
+        - name: images-storage
+          mountPath: /app/images
+        - name: exports-storage
+          mountPath: /app/exports
+        livenessProbe:
+          httpGet:
+            path: /api/images
+            port: 4173
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/images
+            port: 4173
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: images-storage
+        persistentVolumeClaim:
+          claimName: memorylane-images-pvc
+      - name: exports-storage
+        persistentVolumeClaim:
+          claimName: memorylane-exports-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memorylane-service
+spec:
+  selector:
+    app: memorylane
+  ports:
+  - port: 80
+    targetPort: 4173
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: memorylane-images-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: memorylane-exports-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
