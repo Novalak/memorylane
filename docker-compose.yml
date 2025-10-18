@@ -1,13 +1,18 @@
 services:
   memorylane:
-    image: ghcr.io/novalak/memorylane:latest
+    build: .
     hostname: memorylane
     container_name: memorylane
     restart: unless-stopped
     ports:
       - "4173:4173"
     volumes:
-      - ./images:/app/images
-      - ./exports:/app/exports
+      - memorylane_images:/app/images
+      - memorylane_exports:/app/exports
+
     environment:
       - NODE_ENV=production
+
+volumes:
+  memorylane_images:
+  memorylane_exports:
