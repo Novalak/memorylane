@@ -45,7 +45,7 @@ services:
 
 1. **Upload Photos** - Drag & drop or browse files
 2. **Start Slideshow** - Click slideshow button for full-screen viewing
-3. **Admin Access** - Click settings icon to configure settings
+3. **Admin Access** - Click settings icon, enter password `admin123`
 4. **Configure** - Customize heading, footer, and other settings
 5. **Export** - Download all photos as ZIP file
 
