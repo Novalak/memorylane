@@ -45,13 +45,24 @@ const DEFAULT_CONFIG: Config = {
 const getStoredConfig = (): Config => {
   try {
     const stored = localStorage.getItem('memorylane-config');
-    return stored ? {
-      ...DEFAULT_CONFIG,
-      ...JSON.parse(stored)
-    } : DEFAULT_CONFIG;
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      // Always use the new defaults, but allow some customization
+      return {
+        ...DEFAULT_CONFIG,
+        ...parsed,
+        // Force these specific defaults
+        heading: DEFAULT_CONFIG.heading,
+        copyrightText: DEFAULT_CONFIG.copyrightText,
+        windowTitle: DEFAULT_CONFIG.windowTitle,
+        requireUploadPassword: DEFAULT_CONFIG.requireUploadPassword,
+        uploadPassword: DEFAULT_CONFIG.uploadPassword
+      };
+    }
   } catch {
-    return DEFAULT_CONFIG;
+    // If there's an error parsing, return defaults
   }
+  return DEFAULT_CONFIG;
 };
 const getStoredPhotos = (): Photo[] => {
   try {
@@ -204,6 +215,15 @@ export const MemoryLane = () => {
       }
     };
     loadPhotos();
+  }, []);
+
+  // Clear localStorage on first load to ensure fresh defaults
+  React.useEffect(() => {
+    const isFirstLoad = !localStorage.getItem('memorylane-initialized');
+    if (isFirstLoad) {
+      localStorage.removeItem('memorylane-config');
+      localStorage.setItem('memorylane-initialized', 'true');
+    }
   }, []);
 
   // Handle ESC key to exit slideshow
