@@ -28,19 +28,19 @@ type Config = {
 };
 type TransitionType = 'fade' | 'slide-left' | 'slide-right' | 'zoom-in' | 'zoom-out' | 'flip' | 'crossfade' | 'ken-burns' | 'random';
 const DEFAULT_CONFIG: Config = {
-  heading: 'In the loving memory of Marcia Brown.',
-  featurePictureUrl: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&auto=format&fit=crop',
+  heading: 'Happy Anniversary Kristy & Neil',
+  featurePictureUrl: '',
   featurePicturePosition: { x: 50, y: 30 },
   configPassword: 'admin123',
-  requireUploadPassword: false,
-  uploadPassword: 'upload123',
+  requireUploadPassword: true,
+  uploadPassword: '',
   disableSlideshow: false,
   disableUpload: false,
   uploaderNameMandatory: false,
-  copyrightText: 'MemoryLane - when memories live forever',
+  copyrightText: '© 2025 Memory Lane',
   displayUploaderInGallery: true,
   photoSharedByText: 'Photo Shared by',
-  windowTitle: 'MemoryLane'
+  windowTitle: 'Memory Lane'
 };
 const getStoredConfig = (): Config => {
   try {
@@ -288,6 +288,7 @@ export const MemoryLane = () => {
       checkExportStatus();
     }
   }, [isConfigUnlocked]);
+
   React.useEffect(() => {
     if (showFullscreenSlideshow && isPlaying && photos.length > 0) {
       intervalRef.current = setInterval(() => {

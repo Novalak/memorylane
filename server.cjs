@@ -94,7 +94,7 @@ async function convertHeicToJpeg(inputPath, outputPath, retries = 3) {
     try {
       await sharp(inputPath)
         .rotate() // Auto-rotate based on EXIF orientation
-        .jpeg({ quality: 90 })
+        .jpeg({ quality: 100 })
         .toFile(outputPath);
       return true;
     } catch (error) {
