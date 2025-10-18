@@ -1,6 +1,6 @@
 # MemoryLane 🖼️
 
-A beautiful memorial website for sharing photos with slideshow functionality.
+MemoryLane is a heartfelt photo-sharing website that brings loved ones together through timeless slideshows. Cherish every occasion — weddings, birthdays, anniversaries, and farewells — all in one beautiful space.
 
 ## ✨ Features
 
