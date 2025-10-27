@@ -247,11 +247,11 @@ export const SortableContainer = memo(
           const motionTag = childProps['data-magicpath-motion-tag'];
 
           const element = motionTag
-            ? createElement(CustomMotion, { ...childProps, children: null }, childProps.children)
+            ? createElement(CustomMotion, { ...childProps, children: null }, childProps.children as React.ReactNode)
             : child;
 
           const childId = childProps.dndKitId
-            ? generateIdForContainer(element, childProps.containerType)
+            ? generateIdForContainer(element, childProps.containerType as CONTANER_TYPE)
             : generateIdForItem(element, containerType, props['data-magicpath-path']);
 
           processed.push({

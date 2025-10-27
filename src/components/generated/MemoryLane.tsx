@@ -936,9 +936,10 @@ export const MemoryLane = () => {
     // For sequential mode, use the current index within selected photos
     return slideshowPhotos[currentSlideIndex] || slideshowPhotos[0];
   };
-  const getTransitionVariants = (type: TransitionType) => {
+  const getTransitionVariants = (type: TransitionType): { initial: Record<string, unknown>; animate: Record<string, unknown>; exit: Record<string, unknown> } => {
     const actualType = type === 'random' ? ['fade', 'slide-left', 'slide-right', 'zoom-in', 'zoom-out', 'flip', 'crossfade', 'ken-burns'][Math.floor(Math.random() * 8)] as TransitionType : type;
-    const variants: Record<string, { initial: Record<string, unknown>; animate: Record<string, unknown>; exit: Record<string, unknown> }> = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const variants: Record<string, any> = {
       'fade': {
         initial: {
           opacity: 0
@@ -1544,9 +1545,15 @@ export const MemoryLane = () => {
       }} className="fixed inset-0 bg-black z-50 overflow-hidden">
             <div className="w-full h-full relative">
               <AnimatePresence mode="wait">
-                <motion.div key={currentSlideIndex} {...getTransitionVariants(transitionType)} transition={{
-                  duration: 0.8
-                }} className="absolute inset-0 w-full h-full">
+                <motion.div 
+                  key={currentSlideIndex} 
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  {...(getTransitionVariants(transitionType) as any)}
+                  transition={{
+                    duration: 0.8
+                  }} 
+                  className="absolute inset-0 w-full h-full"
+                >
                   {(() => {
                     const { photos, layout, photosPerPage } = getCurrentPageData();
                     
