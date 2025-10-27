@@ -125,8 +125,8 @@ export const SortableContainer = memo(
           setInsertionIndex(prev => (prev !== newIndex ? newIndex : prev));
         },
         onDragEnd({ active, over }) {
-          if (typeof (window as any).__endDragMode === 'function') {
-            (window as any).__endDragMode();
+          if (typeof (window as Window & { __endDragMode?: () => void }).__endDragMode === 'function') {
+            (window as Window & { __endDragMode?: () => void }).__endDragMode?.();
           }
 
           setInsertionIndex(prev => {
@@ -173,8 +173,8 @@ export const SortableContainer = memo(
           }
         },
         onDragCancel() {
-          if (typeof (window as any).__endDragMode === 'function') {
-            (window as any).__endDragMode();
+          if (typeof (window as Window & { __endDragMode?: () => void }).__endDragMode === 'function') {
+            (window as Window & { __endDragMode?: () => void }).__endDragMode?.();
           }
           setInsertionIndex(null);
         },
@@ -184,7 +184,7 @@ export const SortableContainer = memo(
         id: containerId,
         disabled: !isEditMode,
         data: {
-          path: (children as any)?.props?.['data-magicpath-path'],
+          path: (children as { props?: { 'data-magicpath-path'?: string } })?.props?.['data-magicpath-path'],
           type: 'container',
         },
       });
@@ -243,7 +243,7 @@ export const SortableContainer = memo(
             return;
           }
 
-          const childProps = (child.props as any) || {};
+          const childProps: Record<string, unknown> = (child.props as Record<string, unknown>) || {};
           const motionTag = childProps['data-magicpath-motion-tag'];
 
           const element = motionTag

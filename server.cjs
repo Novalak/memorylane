@@ -9,6 +9,9 @@ const archiver = require('archiver');
 // File to store image metadata
 const METADATA_FILE = '/app/images/metadata.json';
 
+// File to store configuration
+const CONFIG_FILE = '/app/images/config.json';
+
 // Load image metadata
 function loadMetadata() {
   try {
@@ -28,6 +31,30 @@ function saveMetadata(metadata) {
     fs.writeFileSync(METADATA_FILE, JSON.stringify(metadata, null, 2));
   } catch (error) {
     console.error('Error saving metadata:', error);
+  }
+}
+
+// Load configuration
+function loadConfig() {
+  try {
+    if (fs.existsSync(CONFIG_FILE)) {
+      const data = fs.readFileSync(CONFIG_FILE, 'utf8');
+      return JSON.parse(data);
+    }
+  } catch (error) {
+    console.error('Error loading config:', error);
+  }
+  return null;
+}
+
+// Save configuration
+function saveConfig(config) {
+  try {
+    fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2));
+    return true;
+  } catch (error) {
+    console.error('Error saving config:', error);
+    return false;
   }
 }
 
@@ -63,7 +90,7 @@ const upload = multer({
   storage: storage,
   limits: {
     fileSize: 50 * 1024 * 1024, // 50MB per file
-    files: 1 // Process one file at a time
+    files: 10 // Allow up to 10 files per request (frontend sends 1 at a time)
   },
   fileFilter: function (req, file, cb) {
     const allowedMimes = [
@@ -314,6 +341,33 @@ app.get('/api/images', (req, res) => {
   } catch (error) {
     console.error('Error reading images:', error);
     res.status(500).json({ error: 'Failed to read images' });
+  }
+});
+
+// API endpoint to get configuration
+app.get('/api/config', (req, res) => {
+  try {
+    const config = loadConfig();
+    res.json(config);
+  } catch (error) {
+    console.error('Error getting config:', error);
+    res.status(500).json({ error: 'Failed to get config' });
+  }
+});
+
+// API endpoint to save configuration
+app.post('/api/config', express.json(), (req, res) => {
+  try {
+    const config = req.body;
+    const success = saveConfig(config);
+    if (success) {
+      res.json({ success: true });
+    } else {
+      res.status(500).json({ error: 'Failed to save config' });
+    }
+  } catch (error) {
+    console.error('Error saving config:', error);
+    res.status(500).json({ error: 'Failed to save config' });
   }
 });
 

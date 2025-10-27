@@ -345,3 +345,5 @@ For additional support:
 - Check the GitHub Issues page
 - Review the application logs
 - Contact the development team
+
+

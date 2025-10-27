@@ -27,7 +27,7 @@ export function MoveProvider({ children }: { children: React.ReactNode }) {
   // const [templateGroups, setTemplateGroups] = useState<Record<string, string[]>>({});
   const [pendingMove, setPendingMove] = useState<Move | null>(null);
   const [pendingUndoMove, setPendingUndoMove] = useState<Move | null>(null);
-  const [isEditMode, setIsEditMode] = useState((window as any).__editModeActive || false);
+  const [isEditMode, setIsEditMode] = useState<boolean>((window as Window & { __editModeActive?: boolean }).__editModeActive || false);
 
   const [history, setHistory] = useState<MoveHistory>({
     moves: [],

@@ -42,21 +42,31 @@ const DEFAULT_CONFIG: Config = {
   photoSharedByText: 'Photo Shared by',
   windowTitle: 'Memory Lane'
 };
-const getStoredConfig = (): Config => {
+const getStoredConfig = async (): Promise<Config> => {
+  try {
+    // First try to load from server
+    const response = await fetch('/api/config');
+    if (response.ok) {
+      const serverConfig = await response.json();
+      if (serverConfig && Object.keys(serverConfig).length > 0) {
+        return {
+          ...DEFAULT_CONFIG,
+          ...serverConfig
+        };
+      }
+    }
+  } catch (error) {
+    console.log('Server config not available, falling back to localStorage');
+  }
+  
+  // Fallback to localStorage
   try {
     const stored = localStorage.getItem('memorylane-config');
     if (stored) {
       const parsed = JSON.parse(stored);
-      // Always use the new defaults, but allow some customization
       return {
         ...DEFAULT_CONFIG,
-        ...parsed,
-        // Force these specific defaults
-        heading: DEFAULT_CONFIG.heading,
-        copyrightText: DEFAULT_CONFIG.copyrightText,
-        windowTitle: DEFAULT_CONFIG.windowTitle,
-        requireUploadPassword: DEFAULT_CONFIG.requireUploadPassword,
-        uploadPassword: DEFAULT_CONFIG.uploadPassword
+        ...parsed
       };
     }
   } catch {
@@ -74,11 +84,19 @@ const getStoredPhotos = (): Photo[] => {
 };
 
 // API functions
+interface ApiImage {
+  filename: string;
+  url: string;
+  thumbnailUrl?: string;
+  uploaderName?: string;
+  uploadDate: string;
+}
+
 const fetchPhotos = async (): Promise<Photo[]> => {
   try {
     const response = await fetch('/api/images');
     const data = await response.json();
-    return data.images.map((img: any, index: number) => ({
+    return data.images.map((img: ApiImage, index: number) => ({
       id: img.filename,
       url: img.url,
       thumbnailUrl: img.thumbnailUrl || img.url,
@@ -121,7 +139,7 @@ const rotatePhoto = async (filename: string, degrees: number): Promise<boolean> 
 
 // @component: MemoryLane
 export const MemoryLane = () => {
-  const [config, setConfig] = React.useState<Config>(getStoredConfig);
+  const [config, setConfig] = React.useState<Config>(DEFAULT_CONFIG);
   const [photos, setPhotos] = React.useState<Photo[]>([]);
   const [showUploadModal, setShowUploadModal] = React.useState(false);
   const [showConfigModal, setShowConfigModal] = React.useState(false);
@@ -159,6 +177,7 @@ export const MemoryLane = () => {
   const [transitionType, setTransitionType] = React.useState<TransitionType>('fade');
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(true);
+  const [photosPerPageMode, setPhotosPerPageMode] = React.useState<'single' | 'multiple'>('single');
   const [editingConfig, setEditingConfig] = React.useState<Config>(DEFAULT_CONFIG);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const featureImageInputRef = React.useRef<HTMLInputElement>(null);
@@ -217,18 +236,34 @@ export const MemoryLane = () => {
     loadPhotos();
   }, []);
 
-  // Clear localStorage on first load to ensure fresh defaults
+  // Load configuration from server on mount
   React.useEffect(() => {
-    const APP_VERSION = '2.0.0'; // Increment this to force fresh start
+    const loadConfig = async () => {
+      try {
+        const loadedConfig = await getStoredConfig();
+        setConfig(loadedConfig);
+      } catch (error) {
+        console.error('Failed to load config:', error);
+      }
+    };
+    loadConfig();
+  }, []);
+
+  // Initialize localStorage version tracking (only on true first load)
+  React.useEffect(() => {
+    const APP_VERSION = '2.0.0';
     const storedVersion = localStorage.getItem('memorylane-version');
     const isFirstLoad = !localStorage.getItem('memorylane-initialized');
     
-    if (isFirstLoad || storedVersion !== APP_VERSION) {
-      // Clear all MemoryLane data
+    if (isFirstLoad) {
+      // Only clear on true first load, not on version changes
       localStorage.removeItem('memorylane-config');
       localStorage.removeItem('memorylane-photos');
       localStorage.removeItem('memorylane-feature-picture');
       localStorage.setItem('memorylane-initialized', 'true');
+      localStorage.setItem('memorylane-version', APP_VERSION);
+    } else if (storedVersion !== APP_VERSION) {
+      // Just update version, don't clear existing data
       localStorage.setItem('memorylane-version', APP_VERSION);
     }
   }, []);
@@ -301,7 +336,36 @@ export const MemoryLane = () => {
     }
   };
   React.useEffect(() => {
+    // Save to localStorage for immediate access
     localStorage.setItem('memorylane-config', JSON.stringify(config));
+    
+    // Also save to server for persistence across sessions
+    const saveToServer = async () => {
+      try {
+        // Only save non-default values to avoid overwriting with defaults
+        const changedValues: Partial<Config> = {};
+        Object.keys(config).forEach(key => {
+          const configKey = key as keyof Config;
+          if (config[configKey] !== DEFAULT_CONFIG[configKey]) {
+            (changedValues as Partial<Config>)[configKey] = config[configKey] as never;
+          }
+        });
+        
+        // Only save if there are actual changes
+        if (Object.keys(changedValues).length > 0) {
+          await fetch('/api/config', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(changedValues)
+          });
+        }
+      } catch (error) {
+        console.error('Failed to save config to server:', error);
+      }
+    };
+    saveToServer();
   }, [config]);
 
   // Update document title when config changes
@@ -319,13 +383,14 @@ export const MemoryLane = () => {
   React.useEffect(() => {
     if (showFullscreenSlideshow && isPlaying && photos.length > 0) {
       intervalRef.current = setInterval(() => {
-        setCurrentSlideIndex(prev => (prev + 1) % photos.length);
+        const totalPages = getTotalPages();
+        setCurrentSlideIndex(prev => (prev + 1) % totalPages);
       }, slideshowSpeed * 1000);
     }
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [showFullscreenSlideshow, isPlaying, photos.length, slideshowSpeed]);
+  }, [showFullscreenSlideshow, isPlaying, photos.length, slideshowSpeed, photosPerPageMode]);
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     setDragOver(true);
@@ -610,12 +675,12 @@ export const MemoryLane = () => {
     setIsPlaying(prev => !prev);
   };
   const nextSlide = () => {
-    const slideshowPhotos = getSelectedPhotos();
-    setCurrentSlideIndex(prev => (prev + 1) % slideshowPhotos.length);
+    const totalPages = getTotalPages();
+    setCurrentSlideIndex(prev => (prev + 1) % totalPages);
   };
   const prevSlide = () => {
-    const slideshowPhotos = getSelectedPhotos();
-    setCurrentSlideIndex(prev => (prev - 1 + slideshowPhotos.length) % slideshowPhotos.length);
+    const totalPages = getTotalPages();
+    setCurrentSlideIndex(prev => (prev - 1 + totalPages) % totalPages);
   };
   const exitFullscreen = () => {
     setShowFullscreenSlideshow(false);
@@ -755,6 +820,107 @@ export const MemoryLane = () => {
     setRandomOrder(order);
   };
 
+  // Intelligently determine optimal photos per page (1-5) and generate layout
+  const generateOptimalLayout = (photos: Photo[]): { layout: Array<{x: number, y: number, width: number, height: number, rotation: number, zIndex: number}>, photosPerPage: number } => {
+    const totalPhotos = photos.length;
+    
+    // Define optimal configurations for 1-5 photos (landscape-friendly)
+    const optimalConfigs = [
+      { count: 1, cols: 1, rows: 1 },
+      { count: 2, cols: 2, rows: 1 }, // Landscape: side by side
+      { count: 3, cols: 3, rows: 1 }, // Landscape: three across
+      { count: 4, cols: 2, rows: 2 }, // Square: 2x2 grid
+      { count: 5, cols: 3, rows: 2 }  // Mixed: 3 top, 2 bottom
+    ];
+    
+    // Find the best configuration that fits the available photos
+    let bestConfig = optimalConfigs[0]; // Default to 1 photo
+    for (const config of optimalConfigs) {
+      if (config.count <= totalPhotos) {
+        bestConfig = config;
+      } else {
+        break;
+      }
+    }
+    
+    const { cols, rows } = bestConfig;
+    const photosPerPage = Math.min(bestConfig.count, totalPhotos);
+    
+    // Generate layout with ultra-minimal spacing
+    const spacing = 0.1; // Ultra-minimal spacing for maximum photo size
+    const availableWidth = 100 - (cols - 1) * spacing;
+    const availableHeight = 100 - (rows - 1) * spacing;
+    
+    const cellWidth = availableWidth / cols;
+    const cellHeight = availableHeight / rows;
+    
+    const layout: Array<{x: number, y: number, width: number, height: number, rotation: number, zIndex: number}> = [];
+    
+    for (let i = 0; i < photosPerPage; i++) {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      
+      const x = col * (cellWidth + spacing);
+      const y = row * (cellHeight + spacing);
+      
+      layout.push({
+        x,
+        y,
+        width: cellWidth,
+        height: cellHeight,
+        rotation: 0,
+        zIndex: i + 1
+      });
+    }
+    
+    return { layout, photosPerPage };
+  };
+
+  // Get photos for current page based on mode
+  const getCurrentPageData = () => {
+    const slideshowPhotos = getSelectedPhotos();
+    const totalPhotos = slideshowPhotos.length;
+    
+    if (totalPhotos === 0) return { photos: [], photosPerPage: 0 };
+    
+    if (photosPerPageMode === 'single') {
+      // Single photo mode - traditional slideshow
+      const photo = slideshowPhotos[currentSlideIndex] || slideshowPhotos[0];
+      return { 
+        photos: [photo], 
+        layout: [{ x: 0, y: 0, width: 100, height: 100, rotation: 0, zIndex: 1 }], 
+        photosPerPage: 1 
+      };
+    } else {
+      // Multiple photo mode - intelligent layout (1-5 photos)
+      const remainingPhotos = totalPhotos - (currentSlideIndex * 5); // Max 5 per page
+      const photosForThisPage = Math.min(remainingPhotos, 5);
+      
+      const startIndex = currentSlideIndex * 5;
+      const endIndex = Math.min(startIndex + photosForThisPage, totalPhotos);
+      const pagePhotos = slideshowPhotos.slice(startIndex, endIndex);
+      
+      // Generate optimal layout for these photos
+      const { layout, photosPerPage } = generateOptimalLayout(pagePhotos);
+      
+      return { photos: pagePhotos, layout, photosPerPage };
+    }
+  };
+
+  // Get total number of pages
+  const getTotalPages = () => {
+    const slideshowPhotos = getSelectedPhotos();
+    const totalPhotos = slideshowPhotos.length;
+    
+    if (totalPhotos === 0) return 0;
+    
+    if (photosPerPageMode === 'single') {
+      return totalPhotos; // One photo per page
+    } else {
+      return Math.ceil(totalPhotos / 5); // Max 5 photos per page
+    }
+  };
+
   // Get current slide index based on mode and selected photos
   const getCurrentSlideIndex = () => {
     return currentSlideIndex;
@@ -772,7 +938,7 @@ export const MemoryLane = () => {
   };
   const getTransitionVariants = (type: TransitionType) => {
     const actualType = type === 'random' ? ['fade', 'slide-left', 'slide-right', 'zoom-in', 'zoom-out', 'flip', 'crossfade', 'ken-burns'][Math.floor(Math.random() * 8)] as TransitionType : type;
-    const variants: Record<string, any> = {
+    const variants: Record<string, { initial: Record<string, unknown>; animate: Record<string, unknown>; exit: Record<string, unknown> }> = {
       'fade': {
         initial: {
           opacity: 0
@@ -1204,6 +1370,37 @@ export const MemoryLane = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Display Mode
+                    </label>
+                    <div className="space-y-2">
+                      <label className="flex items-center gap-2">
+                        <input 
+                          type="radio" 
+                          name="photosPerPageMode" 
+                          value="single" 
+                          checked={photosPerPageMode === 'single'} 
+                          onChange={e => setPhotosPerPageMode('single')} 
+                          className="w-4 h-4 text-blue-600" 
+                        />
+                        <span className="text-sm text-gray-700">1 photo per page (default)</span>
+                      </label>
+                      <label className="flex items-center gap-2">
+                        <input 
+                          type="radio" 
+                          name="photosPerPageMode" 
+                          value="multiple" 
+                          checked={photosPerPageMode === 'multiple'} 
+                          onChange={e => setPhotosPerPageMode('multiple')} 
+                          className="w-4 h-4 text-blue-600" 
+                        />
+                        <span className="text-sm text-gray-700">Multiple photos per page (1-5, auto-optimized)</span>
+                      </label>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Slideshow Mode
                     </label>
                     <div className="space-y-2">
@@ -1347,9 +1544,39 @@ export const MemoryLane = () => {
       }} className="fixed inset-0 bg-black z-50 overflow-hidden">
             <div className="w-full h-full relative">
               <AnimatePresence mode="wait">
-                <motion.img key={currentSlideIndex} src={getCurrentSlidePhoto()?.url} alt={`Slide ${currentSlideIndex + 1}`} {...getTransitionVariants(transitionType)} transition={{
-              duration: 0.8
-            }} className="absolute inset-0 w-full h-full object-contain" />
+                <motion.div key={currentSlideIndex} {...getTransitionVariants(transitionType)} transition={{
+                  duration: 0.8
+                }} className="absolute inset-0 w-full h-full">
+                  {(() => {
+                    const { photos, layout, photosPerPage } = getCurrentPageData();
+                    
+                    if (photosPerPage === 0 || !layout) return null;
+                    
+                    return photos.map((photo, index) => {
+                      const position = layout[index];
+                      if (!position) return null;
+                      
+                      return (
+                        <div
+                          key={`${currentSlideIndex}-${index}`}
+                          className="absolute"
+                          style={{
+                            left: `${position.x}%`,
+                            top: `${position.y}%`,
+                            width: `${position.width}%`,
+                            height: `${position.height}%`
+                          }}
+                        >
+                          <img
+                            src={photo.url}
+                            alt={`Photo ${index + 1}`}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      );
+                    });
+                  })()}
+                </motion.div>
               </AnimatePresence>
 
               <motion.div 
@@ -1367,7 +1594,7 @@ export const MemoryLane = () => {
                       <ChevronLeft className="w-8 h-8" />
                     </button>
                     <span className="text-white font-medium">
-                      {currentSlideIndex + 1} / {getSelectedPhotos().length}
+                      Page {currentSlideIndex + 1} / {getTotalPages()}
                     </span>
                     <button onClick={nextSlide} className="text-white hover:text-gray-300 transition-colors">
                       <ChevronRight className="w-8 h-8" />
@@ -1383,14 +1610,17 @@ export const MemoryLane = () => {
                   </div>
                 </div>
                 
-                {/* Uploader name display */}
-                {displayUploaderInSlideshow && getCurrentSlidePhoto()?.uploaderName && (
-                  <div className="mt-4 text-center">
-                    <p className="text-white/80 text-sm">
-                      {photoSubmittedByText} {getCurrentSlidePhoto()?.uploaderName}
-                    </p>
-                  </div>
-                )}
+                {/* Page info display */}
+                {(() => {
+                  const { photosPerPage } = getCurrentPageData();
+                  return photosPerPage > 0 && (
+                    <div className="mt-4 text-center">
+                      <p className="text-white/80 text-sm">
+                        {photosPerPage} photo{photosPerPage !== 1 ? 's' : ''} on this page
+                      </p>
+                    </div>
+                  );
+                })()}
               </motion.div>
             </div>
           </motion.div>}
@@ -1509,12 +1739,7 @@ export const MemoryLane = () => {
         opacity: 1
       }} exit={{
         opacity: 0
-      }} className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" onClick={() => {
-        setShowConfigModal(false);
-        setConfigPassword('');
-        setConfigError('');
-        setEditingConfig(DEFAULT_CONFIG);
-      }}>
+      }} className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
             <motion.div initial={{
           scale: 0.9,
           opacity: 0

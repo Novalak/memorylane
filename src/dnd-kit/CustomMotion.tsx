@@ -8,7 +8,7 @@ type CustomMotionProps<T extends ElementType> = MotionProps &
   };
 
 export const CustomMotion = memo(
-  forwardRef<HTMLDivElement, CustomMotionProps<any>>((props, ref) => {
+  forwardRef<HTMLDivElement, CustomMotionProps<ElementType>>((props, ref) => {
     const htmlTag =
       props['data-magicpath-motion-tag']?.split('.')[1] || props['prevTag']?.split('.')[1];
     const MotionComponent = motion[htmlTag];

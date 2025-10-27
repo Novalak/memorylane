@@ -118,3 +118,8 @@ test-results.xml
 # Local development
 .local/
 .cache/
+
+# Large files
+Marcia_1080p.mp4
+export.zip
+test.png
