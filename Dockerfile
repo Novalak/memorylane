@@ -31,9 +31,9 @@ RUN addgroup -g 1001 -S nodejs && \
 # Set working directory
 WORKDIR /app
 
-# Copy package files and install production dependencies only
+# Copy package files and install dependencies
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --production=true && \
+RUN yarn install --frozen-lockfile && \
     yarn cache clean
 
 # Copy built application from builder stage
