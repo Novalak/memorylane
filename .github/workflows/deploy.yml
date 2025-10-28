@@ -35,6 +35,9 @@ jobs:
     - name: Test build
       run: |
         yarn build
+        mkdir -p /tmp/images && mkdir -p /tmp/exports
+        sed -i 's|/app/images|/tmp/images|g' server.cjs
+        sed -i 's|/app/exports|/tmp/exports|g' server.cjs
         yarn start &
         sleep 10
         curl -f http://localhost:4173/api/images || exit 1
