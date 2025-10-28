@@ -19,6 +19,8 @@ RUN yarn build
 # Production stage
 FROM node:18-alpine AS production
 
+LABEL org.opencontainers.image.public=true
+
 # Install dumb-init for proper signal handling
 RUN apk add --no-cache dumb-init
 

@@ -59,10 +59,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: Make package public
-      run: |
-        gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
-        gh api -X PATCH /user/packages/container/${{ github.repository_owner }}%2Fmemorylane -f '{"visibility":"public"}' || true
         
     - name: Extract metadata
       id: meta
